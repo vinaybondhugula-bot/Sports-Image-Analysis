@@ -38,9 +38,9 @@ if uploaded_file is not None:
     if st.button('Identify Celebrity'):
         if model is not None:
             # Convert PIL image to OpenCV format
-            #img_array = np.array(image.convert('RGB'))
+            img_array = np.array(image.convert('RGB'))
+            img_cv = cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR)
             img_gray = cv2.cvtColor(img_cv, cv2.COLOR_BGR2GRAY)
-            #img_cv = cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR)
             
             # --- CRITICAL: MATCH THE SIZE USED IN YOUR NOTEBOOK ---
             # If your model was trained on 64x64, change (32, 32) to (64, 64)
@@ -49,7 +49,7 @@ if uploaded_file is not None:
             
             # Reshape based on model input (1, flattened_pixels)
             # For 32x32 RGB images, this is 1 x 3072
-            img_flattened = img_resized.reshape(1, 64*64*3).astype(float)
+            img_flattened = img_resized.reshape(1, 64*64).astype(float)
             
             # Get Prediction
             prediction = model.predict(img_flattened)[0]
