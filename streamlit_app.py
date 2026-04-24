@@ -54,10 +54,14 @@ if uploaded_file is not None:
             # Get Prediction
             prediction = model.predict(img_flattened)[0]
             probs = model.predict_proba(img_flattened)[0]
+            predicted_index = np.argmax(probs)
             
             # 4. Show Results
-            name = class_names[prediction].replace('_', ' ').title()
-            st.success(f"I am {int(max(probs)*100)}% sure this is **{name}**!")
+            #name = class_names[prediction].replace('_', ' ').title()
+            #st.success(f"I am {int(max(probs)*100)}% sure this is **{name}**!")
+            name = class_names[predicted_index].replace('_', ' ').title()
+            confidence = int(probs[predicted_index] * 100)
+            st.success(f"I am {confidence}% sure this is **{name}**!")
             
             # Show Probability Chart
             st.write("Confidence Breakdown:")
