@@ -43,11 +43,11 @@ if uploaded_file is not None:
             
             # --- CRITICAL: MATCH THE SIZE USED IN YOUR NOTEBOOK ---
             # If your model was trained on 64x64, change (32, 32) to (64, 64)
-            img_resized = cv2.resize(img_cv, (32, 32))
+            img_resized = cv2.resize(img_cv, (64, 64))
             
             # Reshape based on model input (1, flattened_pixels)
             # For 32x32 RGB images, this is 1 x 3072
-            img_flattened = img_resized.reshape(1, 32*32*3).astype(float)
+            img_flattened = img_resized.reshape(1, 64*64*3).astype(float)
             
             # Get Prediction
             prediction = model.predict(img_flattened)[0]
