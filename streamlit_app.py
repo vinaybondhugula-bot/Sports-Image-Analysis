@@ -38,12 +38,14 @@ if uploaded_file is not None:
     if st.button('Identify Celebrity'):
         if model is not None:
             # Convert PIL image to OpenCV format
-            img_array = np.array(image.convert('RGB'))
-            img_cv = cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR)
+            #img_array = np.array(image.convert('RGB'))
+            img_gray = cv2.cvtColor(img_cv, cv2.COLOR_BGR2GRAY)
+            #img_cv = cv2.cvtColor(img_array, cv2.COLOR_RGB2BGR)
             
             # --- CRITICAL: MATCH THE SIZE USED IN YOUR NOTEBOOK ---
             # If your model was trained on 64x64, change (32, 32) to (64, 64)
-            img_resized = cv2.resize(img_cv, (64, 64))
+            #img_resized = cv2.resize(img_cv, (64, 64))
+            img_resized = cv2.resize(img_gray, (64, 64))
             
             # Reshape based on model input (1, flattened_pixels)
             # For 32x32 RGB images, this is 1 x 3072
